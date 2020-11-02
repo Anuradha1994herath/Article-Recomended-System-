@@ -6,6 +6,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 def get_title_from_index(index):
 	return df[df.index == index]["Title"].values[0]
 
+def get_First_author_from_index(index):
+	return df[df.index == index]["First author"].values[0]
+
 def get_index_from_title(Title):
 	return df[df.Title == Title]["index"].values[0]
 ##################################################
@@ -45,12 +48,12 @@ similar_articles =  list(enumerate(cosine_sim[article_index]))
 
 ## Get a list of similar articles in descending order of similarity score
 sorted_similar_articles = sorted(similar_articles,key=lambda x:x[1],reverse=True)
-
-## Print titles of first 3 articles
+# print (similar_articles)
+# Print titles of first 3 articles
 print ("Recomended artcles are:")
 i=0
 for element in sorted_similar_articles:
-		print (get_title_from_index(element[0]))
+		print (get_title_from_index(element[0]) + " By " + get_First_author_from_index(element[0] ))
 		i=i+1
 		if i>5:
 			break
